@@ -7,7 +7,7 @@ Este es un proyecto para gestionar y realizar tests de estrés en estudiantes.
 - Python 3.x
 - Django 5.x
 - pip
-- Venv
+- Entorno virtual (Venv)
 
 ## Arquitectura
 
