@@ -19,10 +19,9 @@ from django.urls import path
 from django.http import HttpResponse
 
 def hello_view(request):
-    return HttpResponse("Hello, Django server is running!")
+    return HttpResponse("HOlaa, new server stresstrack!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', hello_view),           # raíz
-    path('hello/', hello_view),     # endpoint /hello
+    path('', hello_view),
 ]
