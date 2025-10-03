@@ -5,6 +5,55 @@ Este es un proyecto para gestionar y realizar tests de estrés en estudiantes.
 ## Requisitos
 
 - Python 3.x
+- Django 5.x
+- pip
+- Venv
+
+## Arquitectura
+
+- Framework: Django
+- Arquitectura MVC (Modelo - Vista - Controlador) adaptada a MVT de Django.
+- Estructura base:  
+- ├─backend_entorno/→ configuración del proyecto
+- ├─ manage.py → script principal
+- ├─ venv/ → entorno virtual
+
+## 🌿 Flujo GitFlow
+1. Se crea rama `feature/entorno-inicial`
+2. Se desarrollan cambios con commits frecuentes
+3. Se finaliza la feature → merge a `develop`
+4. Posteriormente, develop se fusionará con `main` para releases
+
+## Instalación
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/Xanh1/Stress_Track.git
+```
+
+### 2. Entrar al directorio y crear un entorno virtual
+```bash
+cd backend_entorno
+```
+```bash
+python -m venv venv
+```
+
+### 3. Activar el entorno virtual
+* Windows:
+```bash
+venv\Scripts\activate
+```
+
+* Mac/Linux:
+```bash
+source venv/bin/activate
+```
+
+### 4. Instalar dependencias
+```bash
+pip install -r requirements.py
+```
 
 ## Interfacez
 
@@ -52,34 +101,3 @@ Este es un proyecto para gestionar y realizar tests de estrés en estudiantes.
 - [x] **Modificar recomendacio**: (profesores, administradores)
 - [x] **Eliminar recomendacion**: (profesores, administradores)
 - [x] **Estadisticas**: (profesores, estudiantes)
-
-## Instalación
-
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/Xanh1/Stress_Track.git
-```
-
-### 2. Entrar al directorio y crear un entorno virtual
-```bash
-cd backend_entorno
-```
-```bash
-python -m venv venv
-```
-
-### 3. Activar el entorno virtual
-* Windows:
-```bash
-venv\Scripts\activate
-```
-
-* Mac/Linux:
-```bash
-source venv/bin/activate
-```
-
-### 4. Instalar dependencias
-```bash
-pip install -r requirements.py
-```
