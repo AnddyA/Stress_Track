@@ -1,3 +1,12 @@
+import os
+from dotenv import load_dotenv
+# Cargar variables de entorno desde el archivo .env
+load_dotenv()
+# Obtener la SECRET_KEY desde las variables de entorno
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+# Resto de la configuración de settings.py
+
+
 """
 Django settings for backend_entorno project.
 
@@ -19,8 +28,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-okt@e@*g0u&hgh9vtter4j4x^8qmkkvxns6q+0xrx^92k=4@_b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,9 +44,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'auth_service_app',
+    'curses_service_app',
+    'evaluation_service_app',
+    'recommendations_service_app',
+    'rest_framework',
+    'corsheaders',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # Debe ir antes de CommonMiddleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +63,31 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Configuración de Django Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.openapi.AutoSchema',
+}
+
+# Configuración de Simple JWT
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    # Esto asegura que 'user_id' se use como el identificador
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+}
 
 ROOT_URLCONF = 'backend_entorno.urls'
 
@@ -120,3 +160,26 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+# Requisito 2.1: Definir orígenes permitidos
+# Idealmente, cárgalos desde variables de entorno
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Origen de tu frontend (React, Vue, Angular)
+    "http://127.0.0.1:3000",
+    "https://tu-dominio-de-produccion.com",
+]
+
+# También puedes especificar los métodos HTTP
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+# Si necesitas enviar cookies o cabeceras 'Authorization'
+CORS_ALLOW_CREDENTIALS = True

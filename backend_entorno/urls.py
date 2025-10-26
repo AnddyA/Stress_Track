@@ -17,11 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
-
-def hello_view(request):
-    return HttpResponse("HOlaa, new server stresstrack!")
+from django.urls import include
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import TokenRefreshView
+from backend_entorno import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', hello_view),
+
+    path('', include('auth_service_app.urls')), # Tus rutas
+    
+    path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    # Rutas de Swagger (OpenAPI)
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+
+    path('recommendations/', include('recommendations_service_app.urls')),
+    path('courses/', include('curses_service_app.urls')),
+    path('evaluation/', include('evaluation_service_app.urls')),
 ]
