@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from curses_service_app.models import Course, Team
 from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
@@ -33,8 +32,6 @@ class CustomUserManager(BaseUserManager):
         )
     '''
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    from recommendations_service_app.models import Recommendation
-    from evaluation_service_app.models import Test
 
     ROLE_CHOICES = [
         ('student', 'Alumno'),
@@ -53,11 +50,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     stress = models.IntegerField(default=0)
     share_stress_level = models.BooleanField(default=False)
-    recommendation = models.ForeignKey(Recommendation, on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
+    #recommendation = models.ForeignKey(Recommendation, on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='students', null=True, blank=True)
-    group = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='members', null=True, blank=True)
-    tests = models.ManyToManyField(Test, related_name='users', blank=True)
+    #course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='students', null=True, blank=True)
+    #group = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='members', null=True, blank=True)
+    #tests = models.ManyToManyField(Test, related_name='users', blank=True)
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'

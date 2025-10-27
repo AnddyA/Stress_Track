@@ -20,7 +20,6 @@ from django.http import HttpResponse
 from django.urls import include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import TokenRefreshView
-from backend_entorno import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),

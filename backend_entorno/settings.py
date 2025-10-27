@@ -45,12 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'auth_service_app',
-    'curses_service_app',
-    'evaluation_service_app',
-    'recommendations_service_app',
-    'rest_framework',
-    'corsheaders',
-    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
