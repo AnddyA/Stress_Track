@@ -14,9 +14,22 @@ Este es un proyecto para gestionar y realizar tests de estrés en estudiantes.
 - Framework: Django
 - Arquitectura MVC (Modelo - Vista - Controlador) adaptada a MVT de Django.
 - Estructura base:  
-- ├─backend_entorno/→ configuración del proyecto
-- ├─ manage.py → script principal
-- ├─ venv/ → entorno virtual
+- proyecto-base/
+- ├── backend/                                                  # Código fuente del backend
+- │   ├── src/                                                  #(Módulos, controladores, servicios, repositorios)
+- │   ├── tests/                                                # Pruebas unitarias y de integración
+- │   ├── requirements.txt                                      # o package.json según el framework
+- |   ├── .env.example                                          # Variables de entorno (sin claves reales)
+- ├── docs/                                                     # Documentación del proyecto
+- │   ├── architecture/                                         # Diagramas C4
+- │   │   ├── context-diagram.png
+- │   │   ├── container-diagram.png
+- │   │   └── component-diagram.png
+- │   └── informe-seguridad.pdf
+- ├── .github/                                                  # (Opcional) Acciones de CI/CD o plantillas
+- |    ├── README.md                                            # Descripción general del proyecto
+- |    ├── LICENSE                                              # Licencia
+- |    └── .gitignore                                           # Archivos a excluir del control de versiones
 
 ## 🌿 Flujo GitFlow
 1. Se crea rama `feature/entorno-inicial`
