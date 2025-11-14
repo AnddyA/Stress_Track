@@ -15,6 +15,9 @@ def home(request):
         return redirect('panel')
     return render(request, 'index.html')
 
+def apis(request):
+    return render(request, 'api_stresstrack_doc.html')
+
 def log_in(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, request.POST)

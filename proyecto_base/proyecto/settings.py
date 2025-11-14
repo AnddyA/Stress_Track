@@ -135,8 +135,8 @@ EMAIL_HOST_USER = 'stresstrackservice@gmail.com'
 EMAIL_HOST_PASSWORD = 'mahjbtvtpiopsvbs'
 
 # CELERY SETTINGS
-CELERY_BROKER_URL = 'redis://localhost:6379/0' # URL de tu broker (Redis)
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = TIME_ZONE # Usa el timezone de Django
+#CELERY_BROKER_URL = 'redis://localhost:6379/0' # URL de tu broker (Redis)
+#CELERY_ACCEPT_CONTENT = ['json']
+#CELERY_TASK_SERIALIZER = 'json'
+#CELERY_RESULT_SERIALIZER = 'json'
+#CELERY_TIMEZONE = TIME_ZONE # Usa el timezone de Django

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>APIs - StressTrack</title>
+  <style>
+    :root{
+      --bg:#FAF9FF; --card:#FFF; --muted:#6B7280; --accent:#A7F3D0; --accent-2:#FDE68A;
+      --glass: rgba(255,255,255,0.6);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    body{background: linear-gradient(135deg,var(--bg),#F7F9FC); margin:0; padding:28px; color:#0F172A}
+    .container{max-width:980px;margin:0 auto}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:20px}
+    .subtitle{color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    .endpoint{border-left:4px solid #E6E9F2;padding:14px;border-radius:8px;margin-bottom:12px}
+    .method{display:inline-block;padding:6px 10px;border-radius:8px;font-weight:600;font-size:12px}
+    .GET{background:#ECFDF5;color:#065F46}
+    .POST{background:#EFF6FF;color:#1E3A8A}
+    .PUT{background:#FFF7ED;color:#92400E}
+    .DELETE{background:#FEF2F2;color:#991B1B}
+    pre{background:#F8FAFF;padding:12px;border-radius:8px;overflow:auto}
+    .muted{color:var(--muted);font-size:13px}
+    .copy{background:#111827;color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer}
+    .side h3{margin-top:0}
+    .badge{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;margin-right:8px}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    .example{display:flex;gap:8px;align-items:flex-start}
+    .tl{font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#083344">ST</div>
+      <div>
+        <h1>Documentación de API — <span style="color:#0B1220">StressTrack</span></h1>
+        <div class="subtitle">Listado de endpoints REST, ejemplos de request/respuesta y pautas de autenticación.</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="card">
+        <section>
+          <div class="muted">Base URL</div>
+          <pre>https://api.tu-dominio.com/v1</pre>
+          <div class="muted">Autenticación</div>
+          <p class="muted">Bearer token (JWT). Agregar cabecera <code>Authorization: Bearer &lt;token&gt;</code> a endpoints protegidos.</p>
+        </section>
+
+        <hr/>
+
+        <!-- Auth -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method POST">POST</span> <strong>/auth/login</strong>
+              <div class="muted">Obtener token de acceso (email o cédula + contraseña)</div>
+            </div>
+            <div class="muted">Público</div>
+          </div>
+          <div class="muted">Request</div>
+          <pre>{
+  "identifier": "estudiante@ejemplo.com", // o cédula
+  "password": "mi_contraseña"
+}</pre>
+          <div class="muted">Respuesta (ej.)</div>
+          <pre>{
+  "access": "eyJ...",
+  "refresh": "eyJ...",
+  "user": {"id": 12, "nombre": "Ana", "rol": "student"}
+}</pre>
+          <div style="margin-top:8px" class="example">
+            <button class="copy" onclick="copyText('loginCurl')">Copiar cURL</button>
+            <pre id="loginCurl" style="display:none">curl -X POST https://api.tu-dominio.com/v1/auth/login -H 'Content-Type: application/json' -d '{"identifier":"estudiante@ejemplo.com","password":"mi_contraseña"}'</pre>
+          </div>
+        </div>
+
+        <!-- Users -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method GET">GET</span> <strong>/users</strong>
+              <div class="muted">Listar usuarios (admin)</div>
+            </div>
+            <div class="muted">Protegido (admin)</div>
+          </div>
+          <div class="muted">Query params</div>
+          <pre>?page=1&limit=20&rol=student&grupo=3</pre>
+
+          <div class="muted">Respuesta (ej.)</div>
+          <pre>{
+  "count": 120,
+  "results": [{"id":1,"nombre":"Juan","rol":"student","cedula":"01010101"}, ...]
+}</pre>
+        </div>
+
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method POST">POST</span> <strong>/users</strong>
+              <div class="muted">Crear usuario</div>
+            </div>
+            <div class="muted">Protegido (admin)</div>
+          </div>
+          <div class="muted">Request (ej.)</div>
+          <pre>{"nombre":"María","email":"maria@ejemplo.com","cedula":"01020304","rol":"student","password":"pass1234"}</pre>
+        </div>
+
+        <!-- Groups -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method GET">GET</span> <strong>/groups</strong>
+              <div class="muted">Listar grupos</div>
+            </div>
+            <div class="muted">Protegido (docente/admin)</div>
+          </div>
+          <div class="muted">Crear grupo</div>
+          <pre>POST /groups {"nombre":"Grupo A","periodo":"2025-1","miembros":[12,13,14]}</pre>
+        </div>
+
+        <!-- Quizzes / Evaluations -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method POST">POST</span> <strong>/evaluations</strong>
+              <div class="muted">Crear evaluación (docente)</div>
+            </div>
+            <div class="muted">Protegido (docente)</div>
+          </div>
+          <div class="muted">Request (ej.)</div>
+          <pre>{
+  "titulo":"Evaluación Estrés - Parcial 1",
+  "descripcion":"12 preguntas - 4 categorías",
+  "preguntas":[ {"texto":"¿Te sientes...","categoria":"emocional","tipo":"likert","opciones":["Nunca","Rara vez","A veces","Frecuente"]}, ...],
+  "visible_por_defecto": true
+}</pre>
+        </div>
+
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method POST">POST</span> <strong>/evaluations/{id}/assign</strong>
+              <div class="muted">Asignar evaluación a estudiantes o grupos</div>
+            </div>
+            <div class="muted">Protegido (docente)</div>
+          </div>
+          <div class="muted">Request (ej.)</div>
+          <pre>{"asignados":{"usuarios":[12,13],"grupos":[3]},"fecha_inicio":"2025-11-20","fecha_fin":"2025-12-05"}</pre>
+        </div>
+
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method GET">GET</span> <strong>/students/{id}/evaluations</strong>
+              <div class="muted">Historial de evaluaciones realizadas por un estudiante</div>
+            </div>
+            <div class="muted">Protegido (estudiante / docente con permiso)</div>
+          </div>
+          <div class="muted">Respuesta (ej.)</div>
+          <pre>{"evaluaciones":[{"id":45,"titulo":"Evaluación 1","fecha":"2025-06-10","resultado":{"nivel":"medio","score":7.5}}]}</pre>
+        </div>
+
+        <!-- Results -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method POST">POST</span> <strong>/evaluations/{id}/submit</strong>
+              <div class="muted">Enviar respuestas de un estudiante</div>
+            </div>
+            <div class="muted">Protegido (estudiante)</div>
+          </div>
+          <div class="muted">Request (ej.)</div>
+          <pre>{"respuestas":[{"pregunta_id":1,"respuesta":2},...] , "config":{"compartir_con_docente": true}}</pre>
+        </div>
+
+        <!-- Notifications -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method GET">GET</span> <strong>/notifications</strong>
+              <div class="muted">Listar notificaciones (usuario)</div>
+            </div>
+            <div class="muted">Protegido (usuario autenticado)</div>
+          </div>
+          <div class="muted">POST /notifications enviar notificación (admin/docente) con payload {"titulo":"...","mensaje":"...","usuarios":[12],"tipo":"alert"}</div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="endpoint">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div>
+              <span class="method GET">GET</span> <strong>/stats/evaluations/summary</strong>
+              <div class="muted">Resumen estadístico por curso/grupo (docente/admin)</div>
+            </div>
+            <div class="muted">Protegido (docente/admin)</div>
+          </div>
+          <div class="muted">Query params: ?grupo=3&periodo=2025-1</div>
+        </div>
+
+      </main>
+
+      <aside class="card side">
+        <h3>Guía rápida</h3>
+        <div class="muted">Buenas prácticas</div>
+        <ul>
+          <li>Usa paginación en listados grandes (page & limit).</li>
+          <li>Valida roles en el backend (admin/docente/estudiante).</li>
+          <li>Almacena JWT en cookies HttpOnly o en almacenamiento seguro.</li>
+          <li>Registra eventos importantes (creación/edición/asignación).</li>
+        </ul>
+
+        <h3 style="margin-top:12px">Códigos HTTP comunes</h3>
+        <div class="badge">200 OK</div><div class="badge">201 Created</div><div class="badge">400 Bad Request</div><div class="badge">401 Unauthorized</div><div class="badge">403 Forbidden</div><div class="badge">404 Not Found</div>
+
+        <h3 style="margin-top:12px">Ejemplo fetch</h3>
+        <pre>fetch('https://api.tu-dominio.com/v1/evaluations',{method:'GET',headers:{'Authorization':'Bearer '+token}})</pre>
+
+        <h3 style="margin-top:12px">Notas</h3>
+        <p class="muted">Reemplaza los ejemplos por los campos reales de tu modelo Django (User, Group, Evaluation, Result).</p>
+      </aside>
+    </div>
+
+    <footer class="muted">Archivo generado automáticamente — edítalo para agregar tus rutas y modelos exactos.</footer>
+  </div>
+
+  <script>
+    function copyText(id){
+      const el = document.getElementById(id);
+      const text = el ? el.innerText : '';
+      navigator.clipboard.writeText(text).then(()=>{
+        alert('Copiado al portapapeles')
+      }).catch(()=>alert('No se pudo copiar'))
+    }
+  </script>
+</body>
+</html>
