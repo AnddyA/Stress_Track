@@ -6,31 +6,90 @@
   <title>APIs - StressTrack</title>
   <style>
     :root{
-      --bg:#FAF9FF; --card:#FFF; --muted:#6B7280; --accent:#A7F3D0; --accent-2:#FDE68A;
-      --glass: rgba(255,255,255,0.6);
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --bg:#0d0f12;
+      --surface:#1a1d21;
+      --surface-light:#22262b;
+      --text:#e5e7eb;
+      --text-muted:#9ca3af;
+      --accent:#3b82f6;
+      --accent-hover:#60a5fa;
+      --card-radius:10px;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
     }
-    body{background: linear-gradient(135deg,var(--bg),#F7F9FC); margin:0; padding:28px; color:#0F172A}
+    body{
+      background:var(--bg);
+      margin:0;
+      padding:24px;
+      color:var(--text);
+    }
     .container{max-width:980px;margin:0 auto}
-    header{display:flex;align-items:center;gap:16px}
-    h1{margin:0;font-size:20px}
-    .subtitle{color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:18px}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
-    .endpoint{border-left:4px solid #E6E9F2;padding:14px;border-radius:8px;margin-bottom:12px}
-    .method{display:inline-block;padding:6px 10px;border-radius:8px;font-weight:600;font-size:12px}
-    .GET{background:#ECFDF5;color:#065F46}
-    .POST{background:#EFF6FF;color:#1E3A8A}
-    .PUT{background:#FFF7ED;color:#92400E}
-    .DELETE{background:#FEF2F2;color:#991B1B}
-    pre{background:#F8FAFF;padding:12px;border-radius:8px;overflow:auto}
-    .muted{color:var(--muted);font-size:13px}
-    .copy{background:#111827;color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer}
-    .side h3{margin-top:0}
-    .badge{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;margin-right:8px}
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    .example{display:flex;gap:8px;align-items:flex-start}
-    .tl{font-weight:600}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    h1{margin:0;font-size:22px;color:#fff}
+    .subtitle{color:var(--text-muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:1fr 300px;gap:20px;margin-top:20px}
+    .card{
+      background:var(--surface);
+      border-radius:var(--card-radius);
+      padding:20px;
+      box-shadow:0 0 20px rgba(0,0,0,0.25);
+      border:1px solid #2a2f35;
+    }
+    .endpoint{
+      border-left:4px solid var(--accent);
+      background:var(--surface-light);
+      padding:16px;
+      border-radius:var(--card-radius);
+      margin-bottom:14px;
+      border:1px solid #2e333a;
+    }
+    .method{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:8px;
+      font-size:11px;
+      font-weight:700;
+      text-transform:uppercase;
+      background:#111;
+      border:1px solid #333;
+    }
+    .GET{color:#10b981}
+    .POST{color:#3b82f6}
+    .PUT{color:#f59e0b}
+    .DELETE{color:#ef4444}
+    pre{
+      background:#111417;
+      padding:12px;
+      border-radius:var(--card-radius);
+      overflow:auto;
+      font-size:13px;
+      border:1px solid #2a2f35;
+      color:#d1d5db;
+    }
+    .muted{color:var(--text-muted);font-size:13px}
+    .copy{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:6px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      transition:0.2s;
+      font-weight:600;
+    }
+    .copy:hover{background:var(--accent-hover)}
+    aside h3{margin-top:0;color:#fff}
+    .badge{
+      display:inline-block;
+      background:#111417;
+      color:var(--text-muted);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid #2e333a;
+      margin-right:8px;
+      margin-bottom:6px;
+    }
+    footer{margin-top:20px;color:var(--text-muted);font-size:13px;text-align:center}
   </style>
 </head>
 <body>
@@ -45,13 +104,7 @@
 
     <div class="grid">
       <main class="card">
-        <section>
-          <div class="muted">Base URL</div>
-          <pre>https://api.tu-dominio.com/v1</pre>
-          <div class="muted">Autenticación</div>
-          <p class="muted">Bearer token (JWT). Agregar cabecera <code>Authorization: Bearer &lt;token&gt;</code> a endpoints protegidos.</p>
-        </section>
-
+        <h2>Endpoints principales</h2>
         <hr/>
 
         <!-- Auth -->
@@ -205,25 +258,7 @@
 
       </main>
 
-      <aside class="card side">
-        <h3>Guía rápida</h3>
-        <div class="muted">Buenas prácticas</div>
-        <ul>
-          <li>Usa paginación en listados grandes (page & limit).</li>
-          <li>Valida roles en el backend (admin/docente/estudiante).</li>
-          <li>Almacena JWT en cookies HttpOnly o en almacenamiento seguro.</li>
-          <li>Registra eventos importantes (creación/edición/asignación).</li>
-        </ul>
-
-        <h3 style="margin-top:12px">Códigos HTTP comunes</h3>
-        <div class="badge">200 OK</div><div class="badge">201 Created</div><div class="badge">400 Bad Request</div><div class="badge">401 Unauthorized</div><div class="badge">403 Forbidden</div><div class="badge">404 Not Found</div>
-
-        <h3 style="margin-top:12px">Ejemplo fetch</h3>
-        <pre>fetch('https://api.tu-dominio.com/v1/evaluations',{method:'GET',headers:{'Authorization':'Bearer '+token}})</pre>
-
-        <h3 style="margin-top:12px">Notas</h3>
-        <p class="muted">Reemplaza los ejemplos por los campos reales de tu modelo Django (User, Group, Evaluation, Result).</p>
-      </aside>
+      
     </div>
 
     <footer class="muted">Archivo generado automáticamente — edítalo para agregar tus rutas y modelos exactos.</footer>
