@@ -1,0 +1,84 @@
+<div class="modal fade" id="assignTestModal{{ test.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Asignar Test: {{ test.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                
+                <h6 class="fw-bold border-bottom pb-2">Por Curso</h6>
+                {% is_test_assigned_to_all_students test teaching as is_assigned_course %}
+                <form method="post" class="mb-4">
+                    {% csrf_token %}
+                    <input hidden name="test-id" value="{{ test.id }}">
+                    <div class="form-check bg-light p-3 rounded border">
+                        <input class="form-check-input" type="checkbox" name="course-form" 
+                               id="course{{ test.id }}" {% if is_assigned_course %}checked{% endif %}>
+                        <label class="form-check-label fw-bold" for="course{{ test.id }}">
+                            {{ teaching.name }} (Todos los estudiantes)
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-dark btn-sm mt-2" name="assign-test-form-all" value="assign-test-form-all">
+                        Guardar asignación de Curso
+                    </button>
+                </form>
+
+                <h6 class="fw-bold border-bottom pb-2 mt-4">Por Grupos</h6>
+                {% if groups %}
+                    <form method="post" class="mb-4">
+                        {% csrf_token %}
+                        <input hidden name="test-id" value="{{ test.id }}">
+                        <div class="row">
+                            {% for group in groups %}
+                                {% is_group_assigned_to_test test group as is_assigned %}
+                                <div class="col-12 col-md-6">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" name="groups[]" 
+                                               value="{{ group.id }}" id="group{{ group.id }}-{{ test.id }}"
+                                               {% if is_assigned %}checked{% endif %}>
+                                        <label class="form-check-label fs-7" for="group{{ group.id }}-{{ test.id }}">
+                                            {{ group.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-sm mt-2" name="assign-test-form" value="assign-test-form">
+                            Guardar asignación de Grupos
+                        </button>
+                    </form>
+                {% else %}
+                    <div class="alert alert-info fs-7 py-2">No hay grupos creados.</div>
+                {% endif %}
+
+                <h6 class="fw-bold border-bottom pb-2 mt-4">Por Estudiante</h6>
+                {% if students %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input hidden name="test-id" value="{{ test.id }}">
+                        <div class="row" style="max-height: 200px; overflow-y: auto;">
+                            {% for student in students %}
+                                {% is_test_assigned_to_user test student as is_assigned_user %}
+                                <div class="col-12 col-md-6">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" name="students[]" 
+                                               value="{{ student.id }}" id="st{{ student.id }}-{{ test.id }}"
+                                               {% if is_assigned_user %}checked{% endif %}>
+                                        <label class="form-check-label fs-7" for="st{{ student.id }}-{{ test.id }}">
+                                            {{ student.first_name }} {{ student.last_name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-sm mt-2" name="assign-test-form-user" value="assign-test-form-user">
+                            Guardar asignación de Estudiantes
+                        </button>
+                    </form>
+                {% else %}
+                    <div class="alert alert-info fs-7 py-2">No hay estudiantes matriculados.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

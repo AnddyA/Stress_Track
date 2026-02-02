@@ -1,0 +1,384 @@
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  grid-template-rows: 4.5rem 1fr;
+  grid-template-areas:
+  "header header"
+  "side   main";
+
+  gap: 0;
+  background-color: white;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+.header {
+  grid-area: header;
+  background-color: white;
+}
+
+.sidebar{
+  grid-area: side;
+}
+
+.main {
+  grid-area: main;
+  overflow-y: auto;
+}
+
+.fs-5_5 {
+  font-size: 1.1rem;
+}
+
+.fs-7 {
+  font-size: .9rem;
+}
+
+.fs-8 {
+  font-size: .7rem !important;
+}
+
+
+.my-4_5 {
+  margin: 2rem 0;
+}
+
+.mb-4_5 {
+  margin-bottom: 2rem;
+}
+
+.bg-active {
+  background-color: #e8ffee;
+}
+
+.bg-incative {
+  background-color: #ffdfdf;
+}
+
+
+.bg-good {
+  background-color: #dbffe4;
+}
+
+.bg-not-bad {
+  background-color: #fff4db;
+}
+
+.bg-dangerr {
+  background-color: #ffe4db;
+}
+
+.bg-dying {
+  background-color: #ffcccc;
+}
+
+.bg-noti {
+  background-color: #ff7171;
+}
+
+.bg-inf {
+  background-color: rgb(248, 253, 255);
+}
+
+.text-inf {
+  color: rgba(114, 210, 255, 0.949);
+}
+
+.text-not-bad {
+  color: #f8da95;
+}
+
+.text-dying {
+  color: #f9b29a;
+}
+
+.text-grisillo {
+  color: #cacaca;
+  font-size: .9rem;
+}
+
+.text-title-gris {
+  color: #696969;
+}
+
+.text-gris {
+  color: #8f8f8f !important;
+  font-size: .9rem;
+}
+
+
+.bg-color-grisillo {
+  background-color: #ececec;
+}
+
+.stats {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================================
+   DARK MODE - VERSIÓN CORREGIDA (FORCE)
+   ========================================= */
+
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* 1. ARREGLAR EL HEADER BLANCO */
+/* Forzamos que el header y cualquier fondo blanco se vuelvan gris oscuro */
+body.dark-mode .header,
+body.dark-mode .bg-white {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #333;
+}
+
+/* Arreglar el logo "StressTrack" y los enlaces del header */
+body.dark-mode .header a,
+body.dark-mode .text-dark {
+  color: #ffffff !important;
+}
+
+/* 2. ARREGLAR EL BANNER GRANDE (Hola, Andy...) */
+/* El problema es que el fondo es pastel y el texto blanco.
+   Aquí oscurecemos todos tus fondos de colores dinámicos */
+
+/* Si es rojo/dying */
+body.dark-mode .bg-dying, 
+body.dark-mode .bg-dangerr,
+body.dark-mode .bg-noti {
+  background-color: #4a1b1b !important; /* Rojo oscuro profundo */
+  color: #ffcccc !important; /* Texto rojo pálido */
+}
+
+/* Si es verde/good/active */
+body.dark-mode .bg-good,
+body.dark-mode .bg-active {
+  background-color: #0f3d1b !important; /* Verde oscuro */
+  color: #d1e7dd !important;
+}
+
+/* Si es amarillo/not-bad */
+body.dark-mode .bg-not-bad {
+  background-color: #4d3e18 !important; /* Ocre oscuro */
+  color: #ffe69c !important;
+}
+
+/* 3. ARREGLAR CAJAS DE INFORMACIÓN (No tienes tareas...) */
+body.dark-mode .bg-inf {
+  background-color: #1a2529 !important; /* Azul muy oscuro */
+  color: #9ec5fe !important; /* Azul claro */
+  border: 1px solid #2c3e50;
+}
+
+/* 4. ARREGLAR INPUTS, TESTS Y TARJETAS */
+/* Esto arregla los bordes y fondos de las listas */
+body.dark-mode .border,
+body.dark-mode .border-dark {
+  border-color: #444 !important;
+}
+
+/* Elementos generales de texto gris */
+body.dark-mode .text-gris,
+body.dark-mode .text-grisillo,
+body.dark-mode .text-muted {
+  color: #b0b0b0 !important;
+}
+
+/* Dropdowns (Notificaciones) */
+body.dark-mode .dropdown-menu {
+  background-color: #1e1e1e !important;
+  border: 1px solid #444;
+}
+body.dark-mode .dropdown-item {
+  color: #e0e0e0 !important;
+}
+body.dark-mode .dropdown-item:hover {
+  background-color: #333 !important;
+}
+
+/* Arreglar etiqueta "Completado" / bg-color-grisillo */
+body.dark-mode .bg-color-grisillo {
+  background-color: #2d2d2d !important; /* Gris oscuro en vez de blanco */
+  color: #e0e0e0 !important;           /* Texto claro */
+  border-color: #555 !important;       /* Borde sutil */
+}
+
+/* =========================================
+   HOVER EFFECTS (Universal)
+   ========================================= */
+
+/* Seleccionamos botones, enlaces tipo botón y tus elementos clicables */
+button:hover, 
+.btn:hover, 
+a.btn:hover,
+.dropdown-item:hover,
+.bg-color-grisillo:hover { /* Agregamos tu etiqueta de completado por si acaso */
+    
+    /* Esto oscurece el elemento un 15% */
+    filter: brightness(0.85); 
+    
+    /* Esto hace que el cambio sea suave */
+    transition: filter 0.2s ease, background-color 0.2s ease;
+    
+    /* Asegura que aparezca la manito */
+    cursor: pointer; 
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Móvil)
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. CAMBIAR LA GRILLA PRINCIPAL */
+  /* Quitamos la columna lateral y dejamos todo en 1 sola columna */
+  body {
+    grid-template-columns: 1fr; /* Una sola columna */
+    grid-template-rows: 4.5rem 1fr; /* Header y contenido */
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  /* 2. TRANSFORMAR SIDEBAR EN BARRA INFERIOR */
+  .sidebar {
+    position: fixed;        /* Fijar en la pantalla */
+    bottom: 0;              /* Pegar al fondo */
+    left: 0;
+    width: 100%;            /* Ocupar todo el ancho */
+    height: 60px;           /* Altura cómoda para el dedo */
+    z-index: 1000;          /* Que quede por encima de todo */
+    background-color: white;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    
+    /* Cambiar orientación de vertical a horizontal */
+    flex-direction: row !important; 
+    padding: 0 !important;
+  }
+
+  /* Ajustar la lista de iconos para que se distribuyan horizontalmente */
+  .sidebar ul {
+    display: flex;
+    flex-direction: row !important; /* Forzar fila */
+    justify-content: space-around;  /* Separar iconos uniformemente */
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Quitar márgenes extraños de los items en móvil */
+  .sidebar li {
+    padding: 0 10px;
+  }
+
+  /* 3. AJUSTAR EL CONTENIDO PRINCIPAL (MAIN) */
+  /* Dar espacio abajo para que la barra no tape el último contenido */
+  .main {
+    padding-bottom: 80px !important; 
+    padding-right: 1.5rem !important; /* Reducir padding derecho excesivo en móvil */
+    padding-left: 1.5rem !important;
+  }
+  
+  /* Ajustar tamaño de textos grandes en móvil */
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* =========================================
+   RESPONSIVE + DARK MODE
+   ========================================= */
+/* Aseguramos que la barra inferior también se oscurezca en modo noche */
+@media (max-width: 768px) {
+  body.dark-mode .sidebar {
+    background-color: #1e1e1e !important;
+    border-top: 1px solid #333;
+  }
+}
+
+/* --- ESTILOS DEL TEST / QUIZ --- */
+
+/* 1. Tarjetas de pregunta */
+.question-card {
+    background-color: #ffffff;
+    transition: transform 0.2s;
+}
+
+/* 2. Opciones (Labels que parecen botones) */
+.option-label {
+    border: 1px solid #dee2e6; /* Borde suave */
+    color: #555;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.95rem;
+}
+
+/* Cuando pasas el mouse por encima */
+.option-label:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+}
+
+/* 3. ESTADO SELECCIONADO (Cuando el radio input :checked activa el label) */
+.btn-check:checked + .option-label {
+    background-color: #e8f0fe; /* Azul muy clarito */
+    color: #0d6efd;            /* Texto azul */
+    border-color: #0d6efd;     /* Borde azul */
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(13, 110, 253, 0.15);
+}
+
+/* main.css - Agregar al final */
+
+@media (max-width: 768px) {
+  /* Levantar el botón del chat para que no lo tape el menú inferior */
+  #chatbot-toggler {
+    bottom: 80px !important; 
+  }
+  
+  /* Levantar el contenedor del chat */
+  #chatbot-container {
+    bottom: 150px !important;
+    width: 90% !important; /* Que no sea tan ancho en móvil */
+    right: 5% !important;
+    height: 60vh !important;
+  }
+
+  /* Ajustar textos grandes en las tarjetas */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Quitar padding excesivo derecho en contenedores principales */
+  .pe-5 {
+    padding-right: 1rem !important; /* Bootstrap pe-5 es mucho para móvil */
+  }
+}

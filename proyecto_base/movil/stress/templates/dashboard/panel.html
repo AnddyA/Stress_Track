@@ -1,0 +1,172 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block content %}
+
+{% include "elements/dashboard_sidebar.html" with role=role %}
+
+{% include "elements/messages.html" %}
+
+<main class="main p-4 pt-2 pe-3 pe-lg-5">
+    
+    <div class="{{ color }} p-4 rounded-4 my-4">
+        <div class="row align-items-center"> {% if role == 'student' %}
+                <div class="col-12 col-md-9 mb-3 mb-md-0">
+                    <p class="mb-1">Estudiante</p>
+                    <h1 class="fw-bold">Hola, {{ name }} {{surname}} </h1>
+                    <p class="fs-6 m-0 mt-2"> {{ recommendation.description }}</p>
+                </div>
+                <div class="col-12 col-md-3 text-start text-md-center border-start-md">
+                    <h1 class="display-6 fw-bold">{{ stress }} / 100</h1>
+                    <p class="m-0">Nivel de Estrés</p>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p>{% if role == 'teacher' %}Docente{% else %}Administrador{% endif %}</p>
+                    <h1>Hola, {{ name }} {{surname}} </h1>
+                    <p class="fs-6 text-gris m-0">¡Que tengas un excelente día!</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if role == 'student' %}
+    
+        <div class="mb-4">
+            <label class="text-grisillo fw-bold my-2">Tarea</label>
+            {% if not task %}
+                <div class="bg-inf p-3 rounded-2 text-gris">
+                    <i class="fas fa-info-circle"></i> No tienes tareas asignadas.
+                </div>
+            {% else %}
+                <div class="p-3 rounded-2 text-gris border border-1">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-9 mb-2 mb-md-0">
+                            <i class="fa-solid fa-list me-2"></i><span class="fw-bold">{{ task.title }}</span>
+                        </div>
+                        <div class="col-12 col-md-3 text-md-end">
+                            <div class="bg-color-grisillo py-1 px-3 border d-inline-block rounded-3 fs-7">
+                                <i class="fa-regular fa-calendar me-1"></i> {{ task.date }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="mb-4">
+            <label class="text-grisillo fw-bold my-2">Test</label>
+            {% if not test %}
+            <div class="bg-inf p-3 rounded-2 text-gris">
+                <i class="fas fa-info-circle"></i> No tienes tests asignados.
+            </div>
+            {% else %}
+            <div class="p-3 rounded-2 text-gris border border-1">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-8 mb-2 mb-md-0">
+                        <i class="fa-regular fa-pen-to-square me-2"></i>{{ test.title }}
+                    </div>
+                    <div class="col-12 col-md-4 text-md-end">
+                        {% if not test.state %}
+                            <a href="{% url 'test' test.id %}" class="btn btn-outline-dark btn-sm rounded-3 px-3">
+                                Realizar Test
+                            </a>
+                        {% else %}    
+                            <div class="bg-color-grisillo py-1 px-3 border d-inline-block rounded-3 fs-7">
+                                Completado
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label class="text-grisillo fw-bold my-2">Recomendaciones</label>
+            {% if not recommendation %}
+            <div class="bg-inf p-3 rounded-2 text-gris">
+                <i class="fas fa-comment"></i> Sin recomendaciones por el momento.
+            </div>
+            {% else %}
+                <div class="p-3 rounded-2 text-gris border border-1">
+                    <div class="d-flex">
+                        <i class="fa-regular fa-comment me-3 mt-1"></i>
+                        <div>
+                            <span class="fw-bold">{{ recommendation.title }}:</span> {{recommendation.description}}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    {% elif role == 'teacher' %}
+        
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="text-grisillo fw-bold my-2">Estudiantes <i class="fas fa-info-circle fs-8" title="Más estrés"></i></label>
+            </div>
+            
+            {% if not top_3_stressed_students %}
+                <div class="bg-inf p-3 rounded-2 text-gris">
+                    <i class="fas fa-info-circle"></i> No existen estudiantes con niveles altos de estrés.
+                </div>
+            {% else %}
+                {% for student in top_3_stressed_students %}
+                    <div class="p-3 rounded-2 text-gris border border-1 my-2">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-8 mb-2 mb-md-0">
+                                <i class="fa-solid fa-user me-2"></i>{{ student.first_name }} {{ student.last_name }}
+                            </div>
+                            <div class="col-12 col-md-4 text-md-end">
+                                <span class="badge bg-dying text-dark border border-danger px-3 py-2 rounded-3 fw-normal">
+                                    Nivel de estrés: {{ student.stress }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label class="text-grisillo fw-bold my-2">Curso</label>
+            {% if not course_teaching %}
+                <div class="bg-inf p-3 rounded-2 text-gris">No estás asignado a un curso.</div>
+            {% else %}
+                <div class="p-3 rounded-2 text-gris border border-1">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-8 mb-2 mb-md-0">
+                            <i class="fa-solid fa-book me-2"></i>{{ course_teaching.name }}
+                        </div>
+                        <div class="col-12 col-md-4 text-md-end">
+                             <div class="bg-color-grisillo py-1 px-3 border d-inline-block rounded-3 fs-7">
+                                Promedio estrés: {{ average_stress }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <div class="mb-4">
+            <label class="text-grisillo fw-bold my-2">Cursos</label>
+            {% for course in courses %}
+            <div class="p-3 rounded-2 text-gris border border-1 my-2">
+                <div class="row">
+                    <div class="col-12 col-md-6 fw-bold">
+                        <i class="fa-solid fa-book me-2"></i>{{ course.name }}
+                    </div>
+                    <div class="col-12 col-md-6 text-md-end text-muted fs-7">
+                        {{ course.teacher.first_name }} {{ course.teacher.last_name }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="pb-5 d-block d-md-none"></div> 
+
+</main>
+{% endblock %}

@@ -1,0 +1,247 @@
+{% extends "base/dashboard_base.html" %} 
+
+{% block content %} 
+
+{% include "elements/dashboard_sidebar.html" with role=role %} 
+
+{% include "elements/messages.html" %}
+
+<main class="main p-4 pt-2 pe-3 pe-lg-5">
+  <div class="my-4">
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="m-0 h2">Usuarios</h1>
+            <button
+                class="btn btn-outline-dark btn-sm rounded-4 px-3 d-flex align-items-center gap-2"
+                data-bs-toggle="modal"
+                data-bs-target="#addUserModal">
+                <i class="fa-solid fa-plus fs-8"></i> <span>Crear</span>
+            </button>
+        </div>
+
+        <label class="text-grisillo fw-bold my-2">Lista</label>
+
+        {% if users %}
+            {% for user in users %}
+                <div class="p-3 my-2 rounded-2 text-gris border border-1 bg-white">
+                    <div class="row align-items-center gy-2">
+                        
+                        <div class="col-12 col-md-3 d-flex align-items-center">
+                            <div class="me-3 text-secondary fs-5">
+                                {% if user.role == 'student' %}
+                                    <i class="fa-solid fa-user" title="Estudiante"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-user-tie" title="Profesor/Admin"></i>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="fw-bold text-dark d-block">{{ user.first_name }} {{ user.last_name }}</span>
+                                <span class="badge bg-light text-dark border fs-8 fw-normal">
+                                    {% if user.role == 'student' %}Estudiante
+                                    {% elif user.role == 'teacher' %}Profesor
+                                    {% else %}Administrador{% endif %}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3 text-break fs-7">
+                            <i class="fa-regular fa-envelope me-2 d-md-none"></i> {{ user.email }}
+                        </div>
+
+                        <div class="col-6 col-md-2 fs-7">
+                            <span class="text-muted d-md-none">DNI:</span> {{ user.dni }}
+                        </div>
+
+                        <div class="col-6 col-md-2 text-end text-md-center">
+                            {% if user.is_active %}
+                                <span class="badge bg-active text-success border border-success fw-normal px-2 py-1">Activo</span>
+                            {% else %}
+                                <span class="badge bg-incative text-danger border border-danger fw-normal px-2 py-1">Inactivo</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-12 col-md-2 text-end border-top-sm pt-2 pt-md-0 mt-2 mt-md-0">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="#"
+                                   class="btn btn-sm btn-light border text-not-bad" 
+                                   data-bs-toggle="modal" 
+                                   data-bs-target="#editUserModal{{ user.id }}"
+                                   title="Editar">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
+                                
+                                <a href="{% url 'change-user-state' user.id %}"
+                                   class="btn btn-sm btn-light border text-dying"
+                                   title="{% if user.is_active %}Desactivar{% else %}Activar{% endif %}"
+                                   id="update-state-user-{{ user.id }}">
+                                    <i class="fa-solid fa-power-off"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editUserModal{{ user.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold">Editar Usuario</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input hidden name="user-id" value="{{ user.id }}">
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label class="d-block pb-1 fs-7 fw-bold">Nombre</label>
+                                            <input type="text" class="form-control fs-7" name="first_name" value="{{ user.first_name }}">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="d-block pb-1 fs-7 fw-bold">Apellido</label>
+                                            <input type="text" class="form-control fs-7" name="last_name" value="{{ user.last_name }}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="d-block pb-1 fs-7 fw-bold">DNI</label>
+                                        <input type="text" class="form-control fs-7" name="dni" value="{{ user.dni }}">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="d-block pb-1 fs-7 fw-bold">Correo electrónico</label>
+                                        <input type="email" class="form-control fs-7" name="email" value="{{ user.email }}">
+                                    </div>
+                        
+                                    <div class="d-grid mt-4">
+                                        <button class="btn btn-dark fs-7" type="submit" name="form-update-user" value="form-update-user">
+                                            Actualizar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <div class="bg-inf p-3 rounded-2 text-gris">
+                <i class="fas fa-info-circle me-2"></i> No existen usuarios por el momento.
+            </div>
+        {% endif %}
+        
+        <div class="pb-5 d-md-none"></div>
+    </div>
+</main>
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Registrar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm" method="post" >
+                    {% csrf_token %}
+                    
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="d-block pb-1 fs-7 fw-bold">Nombre</label>
+                            <div class="w-100">{{ form.first_name }}</div>
+                            <div class="text-danger fs-8">
+                                {% for error in form.first_name.errors %}{{ error }}{% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="d-block pb-1 fs-7 fw-bold">Apellido</label>
+                            <div class="w-100">{{ form.last_name }}</div>
+                            <div class="text-danger fs-8">
+                                {% for error in form.last_name.errors %}{{ error }}{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="d-block pb-1 fs-7 fw-bold">DNI</label>
+                        <div class="w-100">{{ form.dni }}</div>
+                        <div class="text-danger fs-8">
+                            {% for error in form.dni.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label class="d-block pb-1 fs-7 fw-bold">Correo Electrónico</label>
+                        <div class="w-100">{{ form.email }}</div>
+                        <div class="text-danger fs-8">
+                            {% for error in form.email.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="d-block pb-1 fs-7 fw-bold">Rol</label>
+                        <div class="w-100">{{ form.role }}</div>
+                        <div class="text-danger fs-8">
+                            {% for error in form.role.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="d-block pb-1 fs-7 fw-bold">Contraseña</label>
+                            <div class="w-100">{{ form.password1 }}</div>
+                            <div class="text-danger fs-8">
+                                {% for error in form.password1.errors %}{{ error }}{% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="d-block pb-1 fs-7 fw-bold">Verificar</label>
+                            <div class="w-100">{{ form.password2 }}</div>
+                            <div class="text-danger fs-8">
+                                {% for error in form.password2.errors %}{{ error }}{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" name="form-create" value="form-create" class="btn btn-dark fs-7">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteLinks = document.querySelectorAll('a[id^="update-state-user-"]');
+
+        deleteLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: '¿Realmente quieres cambiar el estado del usuario?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, cambiar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true,
+                    confirmButtonColor: "#ff5656"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link.getAttribute('href');
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+{% endblock %}

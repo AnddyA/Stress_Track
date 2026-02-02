@@ -1,0 +1,168 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block content %}
+
+{% include "elements/dashboard_sidebar.html" with role=role %}
+
+{% include "elements/messages.html" %}
+
+<main class="main p-4 pt-2 pe-3 pe-lg-5">
+    <div class="row mt-4">
+        <div class="col-12 p-0">
+            <h1 class="m-0">Configuración</h1>
+        </div>      
+    </div>
+    <div>
+        <label class="text-grisillo fw-bold my-2">Información de la cuenta</label>
+    </div>
+    
+    <div class="row g-4"> <div class="col-12 col-md-6 mt-2">
+            <label class="text-grisillo fw-bold my-2">Perfil General</label>
+            <form action="" method="POST" class="mb-2 p-3 border rounded bg-white">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label class="d-block pb-1 fs-7">Nombre</label>
+                        <input type="text" name="first_name" class="form-control fs-7 bg-light" value="{{ user.first_name }}" readonly>
+                    </div>
+                    <div class="col-6">
+                        <label class="d-block pb-1 fs-7">Apellido</label>
+                        <input type="text" name="last_name" class="form-control fs-7 bg-light" value="{{ user.last_name}}" readonly>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="d-block pb-1 fs-7">DNI</label>
+                    <input type="text" name="dni" class="form-control fs-7 bg-light" value="{{ user.dni }}" readonly>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="d-block pb-1 fs-7">Correo electrónico</label>
+                    <div class="w-100">
+                        {{ form.email }}
+                    </div>
+                    <div class="text-danger fs-8">
+                        {% for error in form.email.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+    
+                <div class="d-grid mt-4 pt-2">
+                    <button class="btn btn-dark fs-7" type="submit" name="form-update-user" value="form-update-user">
+                        Actualizar Datos
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 mt-2">
+            <label class="text-grisillo fw-bold my-2">Contraseña</label>
+            <form action="" method="POST" class="mb-2 p-3 border rounded bg-white">
+                {% csrf_token %}
+    
+                <div class="mb-3">
+                    <label class="d-block pb-1 fs-7">Contraseña actual</label>
+                    {{ form_pass.old_password }}
+                    <div class="text-danger fs-8">
+                        {% for error in form_pass.old_password.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="d-block pb-1 fs-7">Nueva contraseña</label>
+                    {{ form_pass.new_password1 }}
+                    <div class="text-danger fs-8">
+                        {% for error in form_pass.new_password1.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="d-block pb-1 fs-7">Confirmar nueva contraseña</label>
+                    {{ form_pass.new_password2 }}
+                    <div class="text-danger fs-8">
+                        {% for error in form_pass.new_password2.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+    
+                <div class="d-grid mt-4 pt-2">
+                    <button class="btn btn-dark fs-7" type="submit" name="form-update-pass" value="form-update-pass">
+                        Actualizar contraseña
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if role == 'student' %}
+        <div class="row mt-3">
+            <div class="col-12 col-md-6">
+                <label class="text-grisillo fw-bold mt-4 mb-2">Estrés</label>
+                <form method="post" class="p-3 border rounded bg-white">
+                    {% csrf_token %}
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="share_stress_level" id="stressCheck" {% if share_stress %}checked{% endif %}>
+                        <label class="form-check-label fs-7" for="stressCheck">
+                            Compartir nivel de estrés con profesores
+                        </label>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-dark fs-7" type="submit" name="form-stress-share" value="form-stress-share">Guardar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-md-6">
+                <label class="text-grisillo fw-bold mt-4 mb-2 d-block">Cuenta</label>
+                <div class="p-3 border rounded bg-white">
+                     <div class="d-grid">
+                        <a href="{% url 'desactivate-account' %}" id="btn-desactivate" class="btn btn-danger fs-7">
+                            Desactivar cuenta
+                        </a>
+                     </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row mt-3">
+            <div class="col-12 col-md-6">
+                 <label class="text-grisillo fw-bold mt-4 mb-2 d-block">Cuenta</label>
+                 <div class="p-3 border rounded bg-white">
+                     <div class="d-grid">
+                        <a href="{% url 'desactivate-account' %}" id="btn-desactivate" class="btn btn-danger fs-7">
+                            Desactivar cuenta
+                        </a>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="pb-5 d-md-none"></div>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const desactivateBtn = document.getElementById('btn-desactivate');
+    if(desactivateBtn){
+        desactivateBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Advertencia',
+                text: '¿Estás seguro de que deseas desactivar tu cuenta?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, desactivar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true,
+                confirmButtonColor: "#ff5656"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = desactivateBtn.getAttribute('href');
+                }
+            });
+        });
+    }
+});
+</script>
+
+{% endblock %}
