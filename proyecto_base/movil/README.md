@@ -1,14 +1,15 @@
 ### Para iniciar el proyecto movil
 1. Se nesesita instalar Android Studio
 2. Crear entorno virtual
-´´´python
+´´´json
 python -m venv venv
 ´´´
 3. Entrar entorno virtual
-´´´python
+
+´´´json
 venv\Scripts\activate
 ´´´
 4. Instalar requirements
-´´´python
+´´´json
 pip install - r requirements
 ´´´
