@@ -34,7 +34,7 @@ A continuación, se documenta el consumo del endpoint de **Registro de Estrés**
   "actividad": "Examen final de redes",
   "fecha": "2026-02-01T10:30:00"
 }
-```
+
 **Codigo de estado**
 ```json
 {
@@ -45,7 +45,7 @@ A continuación, se documenta el consumo del endpoint de **Registro de Estrés**
     "registrado_el": "2026-02-01T10:30:05"
   }
 }
-```
+
 ---
 
 ## 3. Capturas de Pantalla de la App en Ejecución
