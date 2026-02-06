@@ -11,8 +11,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="m-0 h2">Curso</h1>
       {% if role == 'teacher' %}
-      <button class="btn btn-outline-dark btn-sm rounded-4 px-3 d-flex align-items-center gap-2"
-        data-bs-toggle="modal" data-bs-target="#addGroupModal">
+      <button class="btn btn-outline-success btn-sm rounded-4 px-3 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addGroupModal">
         <i class="fa-solid fa-plus"></i> <span>Grupo</span>
       </button>
       {% endif %}
@@ -48,9 +47,6 @@
                     </div>
 
                     <div class="col-6 col-md-4 d-flex align-items-center">
-                        <span class="badge bg-light text-dark border me-2">
-                            {% if student.group %}{{ student.group }}{% else %}Sin Grupo{% endif %}
-                        </span>
                         {% if role == 'teacher' %}
                         <button data-bs-toggle="modal" data-bs-target="#putTeamUser" 
                                 class="btn btn-sm btn-link text-gris p-0 put-team"
@@ -58,6 +54,10 @@
                             <i class="fa-solid fa-gears"></i>
                         </button>
                         {% endif %}
+                        <span> - </span>
+                        <span class="badge bg-light text-dark border me-2">
+                            {% if student.group %}{{ student.group }}{% else %}Sin Grupo{% endif %}
+                        </span>
                     </div>
 
                     <div class="col-6 col-md-3 text-end">

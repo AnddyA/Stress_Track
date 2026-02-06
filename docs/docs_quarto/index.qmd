@@ -1,0 +1,26 @@
+---
+title: "Documentación del Proyecto StressTrack"
+---
+
+Bienvenido a la documentación oficial de **StressTrack**, el sistema de gestión de estrés académico.
+
+Esta documentación técnica y de usuario ha sido generada utilizando **Quarto**, integrándose directamente en el repositorio del proyecto para garantizar su mantenibilidad.
+
+## Resumen del Proyecto
+
+**StressTrack** es una solución híbrida que permite a los estudiantes registrar y monitorear sus niveles de estrés. El sistema consta de:
+
+* **Backend:** Desarrollado en **Django (Python)**, encargado de la lógica de negocio, base de datos y API REST.
+* **Frontend Web:** Plantillas de Django con diseño responsivo.
+* **Aplicación Móvil:** Aplicación Android generada con **Capacitor**, que consume los servicios del backend.
+
+## Contenido de la Documentación
+
+1.  **[Manual de Usuario](manual_usuario.qmd):** Guía paso a paso para estudiantes.
+2.  **[Arquitectura del Sistema](arquitectura.qmd):** Diagramas C4 (Niveles 1 al 4).
+3.  **[Instalación y Despliegue](instalacion.qmd):** Guía para desarrolladores.
+4.  **[Evidencias de Pruebas](pruebas.qmd):** Reportes de integración y rendimiento.
+
+::: {.callout-note}
+Esta documentación se encuentra versionada junto con el código fuente en el repositorio oficial.
+:::

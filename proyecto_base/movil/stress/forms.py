@@ -152,7 +152,6 @@ class CreateCourseForm(forms.ModelForm):
             'placeholder': '',
         })
 
-
 class RecommendationForm(forms.ModelForm):
     class Meta:
         model = Recommendation
@@ -172,12 +171,39 @@ class RecommendationForm(forms.ModelForm):
             'placeholder': '',
         })
 
+        # Agregamos min="1" y max="100" al HTML para validación visual
         self.fields['min_percent'].widget.attrs.update({
             'class': 'w-100 fs-7 py-1 px-2 border border-1 border-dark rounded-2',
             'placeholder': '',
+            'min': '1',   # <--- Restricción HTML
+            'max': '100', # <--- Restricción HTML
         })
 
         self.fields['max_percent'].widget.attrs.update({
             'class': 'w-100 fs-7 py-1 px-2 border border-1 border-dark rounded-2',
             'placeholder': '',
+            'min': '1',   # <--- Restricción HTML
+            'max': '100', # <--- Restricción HTML
         })
+
+    # Validaciones de Lógica (Backend)
+    def clean(self):
+        cleaned_data = super().clean()
+        min_percent = cleaned_data.get("min_percent")
+        max_percent = cleaned_data.get("max_percent")
+
+        if min_percent is not None and max_percent is not None:
+            # 1. Validar Rango (Seguridad backend por si saltan el HTML)
+            if not (1 <= min_percent <= 100):
+                self.add_error('min_percent', "El porcentaje mínimo debe estar entre 1 y 100.")
+            
+            if not (1 <= max_percent <= 100):
+                self.add_error('max_percent', "El porcentaje máximo debe estar entre 1 y 100.")
+
+            # 2. Validar Lógica (Min < Max)
+            # Solo comparamos si ambos números son válidos individualmente
+            if (1 <= min_percent <= 100) and (1 <= max_percent <= 100):
+                if min_percent > max_percent:
+                    raise forms.ValidationError("El porcentaje mínimo no puede ser mayor que el máximo.")
+
+        return cleaned_data

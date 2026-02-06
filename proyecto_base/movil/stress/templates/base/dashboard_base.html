@@ -64,6 +64,38 @@
         })();
     </script>
 
+    <a href="{% static '_site/index.html' %}" target="_blank" class="float-docs-btn" title="Ver Manual de Usuario">
+        <i class="fa-solid fa-book-open"></i>
+    </a>
+
+    <style>
+        .float-docs-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2563eb;
+            /* Color azul */
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            /* Centrar verticalmente */
+            font-size: 24px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .float-docs-btn:hover {
+            background-color: #1e40af;
+            transform: scale(1.1);
+            /* Efecto de crecimiento */
+        }
+    </style>
+
 </body>
 
 </html>

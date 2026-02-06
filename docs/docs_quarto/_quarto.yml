@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Documentación StressTrack"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Inicio"
+      - href: manual_usuario.qmd
+        text: "Manual de Usuario"
+      - href: instalacion.qmd
+        text: "Instalación y Despliegue"
+      - href: pruebas.qmd
+        text: "Pruebas y Rendimiento"
+      - href: arquitectura.qmd
+        text: "Arquitectura del Sistema C4"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true
+  pdf:
+    documentclass: scrreport

@@ -356,7 +356,6 @@ a.btn:hover,
     box-shadow: 0 4px 6px rgba(13, 110, 253, 0.15);
 }
 
-/* main.css - Agregar al final */
 
 @media (max-width: 768px) {
   /* Levantar el botón del chat para que no lo tape el menú inferior */
@@ -381,4 +380,75 @@ a.btn:hover,
   .pe-5 {
     padding-right: 1rem !important; /* Bootstrap pe-5 es mucho para móvil */
   }
+}
+
+/* =========================================
+   BOTONES DE ACCIÓN (Editar / Eliminar)
+   ========================================= */
+
+/* --- 1. EDITAR (Amarillo) --- */
+/* Usamos un amarillo 'ambar' (#ffc107) para que se pueda leer sobre fondo blanco. 
+   El amarillo puro no se ve bien en textos. */
+.text-not-bad {
+    color: #ffc107 !important; /* Amarillo Bootstrap */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse: Fondo amarillo, texto oscuro */
+.btn.text-not-bad:hover,
+a.text-not-bad:hover {
+    background-color: #ffc107 !important;
+    color: #000 !important; /* Texto negro para buen contraste */
+    border-color: #ffc107 !important;
+}
+
+/* --- 2. ELIMINAR (Rojo) --- */
+.text-dying {
+    color: #dc3545 !important; /* Rojo Bootstrap */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse: Fondo rojo, texto blanco */
+.btn.text-dying:hover,
+a.text-dying:hover {
+    background-color: #dc3545 !important;
+    color: #fff !important; /* Texto blanco */
+    border-color: #dc3545 !important;
+}
+
+/* =========================================
+   CORRECCIONES MODO OSCURO (Inputs y Botones)
+   ========================================= */
+
+/* 1. ARREGLAR INPUTS, FORMULARIOS Y CAJAS 'BG-LIGHT' */
+/* Esto soluciona que el nombre, apellido y DNI se vean blancos sobre fondo blanco */
+body.dark-mode input.form-control,
+body.dark-mode textarea.form-control,
+body.dark-mode select.form-select,
+body.dark-mode .bg-light { 
+    background-color: #2d2d2d !important; /* Fondo gris oscuro */
+    color: #e0e0e0 !important;            /* Texto blanco suave */
+    border-color: #444 !important;        /* Borde sutil */
+}
+
+/* Asegurar que los inputs deshabilitados/readonly también se oscurezcan */
+body.dark-mode .form-control:disabled, 
+body.dark-mode .form-control[readonly] {
+    background-color: #252525 !important; /* Un poco más oscuro para diferenciar */
+    opacity: 1;
+}
+
+/* 2. ARREGLAR BOTÓN 'NUEVO' (btn-outline-dark) */
+/* Transforma los botones de borde negro en borde blanco automáticamente */
+body.dark-mode .btn-outline-dark {
+    color: #f8f9fa !important;        /* Texto blanco */
+    border-color: #f8f9fa !important; /* Borde blanco */
+}
+
+/* Efecto hover en modo oscuro (se rellena de blanco) */
+body.dark-mode .btn-outline-dark:hover,
+body.dark-mode .btn-check:checked + .btn-outline-dark {
+    background-color: #f8f9fa !important;
+    color: #000 !important;           /* Texto negro */
+    border-color: #f8f9fa !important;
 }

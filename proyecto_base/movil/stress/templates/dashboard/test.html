@@ -13,12 +13,9 @@
     <div class="my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="m-0 h2">Tests</h1>
-            {% if role == 'teacher' or role == 'superuser' %}
-                <button 
-                    class="btn btn-outline-dark btn-sm rounded-4 px-3 d-flex align-items-center gap-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#addTestModal">
-                    <i class="fa-solid fa-plus fs-8"></i> <span>Nuevo</span>
+            {% if role == 'teacher' %}
+                <button class="btn btn-outline-success btn-sm rounded-4 px-3 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addTestModal">
+                    <i class="fa-solid fa-plus"></i> <span>Nuevo</span>
                 </button>
             {% endif %}
         </div>
@@ -42,7 +39,7 @@
                                 </div>
                                 <div class="col-12 col-md-4 text-md-end">
                                     <a href="#" 
-                                       class="btn btn-sm btn-outline-secondary border-0 assign-test" 
+                                       class="btn btn-sm btn-outline-secondary border-0 assign-test text-primary" 
                                        data-bs-toggle="modal" 
                                        data-bs-target="#assignTestModal{{ test.id }}"
                                        title="Asignar test"
@@ -229,7 +226,7 @@
                                     <div class="d-flex justify-content-end align-items-center gap-2">
                                         
                                         <a href="#" 
-                                           class="text-decoration-none text-gris fs-7 border rounded px-2 py-1" 
+                                           class="text-decoration-none text-primary fs-7 border-0 rounded px-2 py-1" 
                                            data-bs-toggle="modal" 
                                            data-bs-target="#assignTestModal{{ test.id }}">
                                             <i class="fa-solid fa-users"></i> Asignar

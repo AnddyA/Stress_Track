@@ -13,15 +13,14 @@
             
             <div class="d-flex gap-2">
                 {% if role == 'teacher' %}
-                    <button class="btn btn-outline-dark btn-sm rounded-4 px-3"
+                    <button class="btn btn-outline-primary btn-sm rounded-4 px-3"
                             data-bs-toggle="modal" data-bs-target="#assignRecoModal">
                         <i class="fa-solid fa-plus fs-8"></i> Asignar
                     </button>
                 {% endif %}
                 
-                <button class="btn btn-outline-dark btn-sm rounded-4 px-3"
-                        data-bs-toggle="modal" data-bs-target="#addRecoModal">
-                    <i class="fa-solid fa-plus fs-8"></i> Crear
+                <button class="btn btn-outline-success btn-sm rounded-4 px-3 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addRecoModal">
+                    <i class="fa-solid fa-plus"></i> <span>Nuevo</span>
                 </button>
             </div>
         </div>

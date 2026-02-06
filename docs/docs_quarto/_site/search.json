@@ -1,0 +1,156 @@
+[
+  {
+    "objectID": "pruebas.html",
+    "href": "pruebas.html",
+    "title": "Evidencias de Pruebas",
+    "section": "",
+    "text": "La sección de evidencias técnicas."
+  },
+  {
+    "objectID": "pruebas.html#markdown",
+    "href": "pruebas.html#markdown",
+    "title": "Evidencias de Pruebas",
+    "section": "```markdown",
+    "text": "```markdown"
+  },
+  {
+    "objectID": "pruebas.html#title-evidencias-de-pruebas",
+    "href": "pruebas.html#title-evidencias-de-pruebas",
+    "title": "Evidencias de Pruebas",
+    "section": "title: “Evidencias de Pruebas”",
+    "text": "title: “Evidencias de Pruebas”"
+  },
+  {
+    "objectID": "pruebas.html#pruebas-de-integración",
+    "href": "pruebas.html#pruebas-de-integración",
+    "title": "Evidencias de Pruebas",
+    "section": "1. Pruebas de Integración",
+    "text": "1. Pruebas de Integración\nSe verificó la correcta comunicación entre el cliente móvil (Capacitor) y el API REST de Django.\n\nCaso de Prueba: Envío de Datos (POST)\n\nObjetivo: Verificar que el móvil puede escribir en la base de datos PostgreSQL.\nResultado: Exitoso.\nEvidencia:\n\n\nEl servidor retornó código 201 Created tras el envío desde el dispositivo Android (Pixel 5 Emulator)."
+  },
+  {
+    "objectID": "pruebas.html#manejo-de-errores",
+    "href": "pruebas.html#manejo-de-errores",
+    "title": "Evidencias de Pruebas",
+    "section": "2. Manejo de Errores",
+    "text": "2. Manejo de Errores\nSe implementó un manejo robusto de excepciones para garantizar la estabilidad.\n\n\n\n\n\n\n\n\nEscenario\nComportamiento del Sistema\nResultado\n\n\n\n\nServidor Caído\nLa app muestra alerta: “Error de conexión, intente más tarde”. No se cierra inesperadamente.\n✅ Aprobado\n\n\nDatos Vacíos\nEl formulario muestra validación visual “Este campo es requerido”.\n✅ Aprobado"
+  },
+  {
+    "objectID": "pruebas.html#pruebas-de-rendimiento",
+    "href": "pruebas.html#pruebas-de-rendimiento",
+    "title": "Evidencias de Pruebas",
+    "section": "3. Pruebas de Rendimiento",
+    "text": "3. Pruebas de Rendimiento\nSe evaluó la latencia de respuesta en red local.\n\nTiempo promedio de carga (Home): 120ms\nTiempo de respuesta API (Registro): 45ms\nConsumo de batería (Móvil): Bajo (Uso eficiente de WebViews).\n\n\n\n\n\n\n\nImportant\n\n\n\nEl sistema mantiene su estabilidad incluso con fluctuaciones de red gracias al manejo asíncrono de peticiones (Async/Await)."
+  },
+  {
+    "objectID": "instalacion.html",
+    "href": "instalacion.html",
+    "title": "Guía de Instalación y Despliegue",
+    "section": "",
+    "text": "Python 3.10+\nNode.js 18+ (Para la versión móvil)\nAndroid Studio (Para compilar el APK)"
+  },
+  {
+    "objectID": "instalacion.html#requisitos-previos",
+    "href": "instalacion.html#requisitos-previos",
+    "title": "Guía de Instalación y Despliegue",
+    "section": "",
+    "text": "Python 3.10+\nNode.js 18+ (Para la versión móvil)\nAndroid Studio (Para compilar el APK)"
+  },
+  {
+    "objectID": "instalacion.html#despliegue-del-backend-django",
+    "href": "instalacion.html#despliegue-del-backend-django",
+    "title": "Guía de Instalación y Despliegue",
+    "section": "1. Despliegue del Backend (Django)",
+    "text": "1. Despliegue del Backend (Django)\nPasos para levantar el servidor:"
+  },
+  {
+    "objectID": "instalacion.html#despliegue-aplicacion-movil",
+    "href": "instalacion.html#despliegue-aplicacion-movil",
+    "title": "Guía de Instalación y Despliegue",
+    "section": "Despliegue aplicacion movil",
+    "text": "Despliegue aplicacion movil\nPasos para iniciar la app movil:"
+  },
+  {
+    "objectID": "arquitectura.html",
+    "href": "arquitectura.html",
+    "title": "Arquitectura del Sistema (Modelo C4)",
+    "section": "",
+    "text": "La arquitectura se documenta utilizando el modelo C4 para visualizar las abstracciones por niveles."
+  },
+  {
+    "objectID": "arquitectura.html#nivel-1-diagrama-de-contexto",
+    "href": "arquitectura.html#nivel-1-diagrama-de-contexto",
+    "title": "Arquitectura del Sistema (Modelo C4)",
+    "section": "Nivel 1: Diagrama de Contexto",
+    "text": "Nivel 1: Diagrama de Contexto\nMuestra el sistema en el centro y sus interacciones con actores externos.\n\n\n\nDiagrama de Contexto (Nivel 1)"
+  },
+  {
+    "objectID": "arquitectura.html#nivel-2-diagrama-de-contenedores",
+    "href": "arquitectura.html#nivel-2-diagrama-de-contenedores",
+    "title": "Arquitectura del Sistema (Modelo C4)",
+    "section": "Nivel 2: Diagrama de Contenedores",
+    "text": "Nivel 2: Diagrama de Contenedores\nMuestra las aplicaciones desplegables y bases de datos.\n\n\n\nDiagrama de Contenedores (Nivel 2)"
+  },
+  {
+    "objectID": "arquitectura.html#nivel-3-diagrama-de-componentes-api-backend",
+    "href": "arquitectura.html#nivel-3-diagrama-de-componentes-api-backend",
+    "title": "Arquitectura del Sistema (Modelo C4)",
+    "section": "Nivel 3: Diagrama de Componentes (API Backend)",
+    "text": "Nivel 3: Diagrama de Componentes (API Backend)\nDetalle interno del contenedor “Backend API”.\n\n\n\nDiagrama de Componentes (Nivel 3)"
+  },
+  {
+    "objectID": "arquitectura.html#nivel-4-diagrama-de-código-modelo-principal",
+    "href": "arquitectura.html#nivel-4-diagrama-de-código-modelo-principal",
+    "title": "Arquitectura del Sistema (Modelo C4)",
+    "section": "Nivel 4: Diagrama de Código (Modelo Principal)",
+    "text": "Nivel 4: Diagrama de Código (Modelo Principal)\nDetalle de la clase principal del dominio.\n\n\n\nDiagrama de Clases (Nivel 4)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Documentación del Proyecto StressTrack",
+    "section": "",
+    "text": "Bienvenido a la documentación oficial de StressTrack, el sistema de gestión de estrés académico.\nEsta documentación técnica y de usuario ha sido generada utilizando Quarto, integrándose directamente en el repositorio del proyecto para garantizar su mantenibilidad."
+  },
+  {
+    "objectID": "index.html#resumen-del-proyecto",
+    "href": "index.html#resumen-del-proyecto",
+    "title": "Documentación del Proyecto StressTrack",
+    "section": "Resumen del Proyecto",
+    "text": "Resumen del Proyecto\nStressTrack es una solución híbrida que permite a los estudiantes registrar y monitorear sus niveles de estrés. El sistema consta de:\n\nBackend: Desarrollado en Django (Python), encargado de la lógica de negocio, base de datos y API REST.\nFrontend Web: Plantillas de Django con diseño responsivo.\nAplicación Móvil: Aplicación Android generada con Capacitor, que consume los servicios del backend."
+  },
+  {
+    "objectID": "index.html#contenido-de-la-documentación",
+    "href": "index.html#contenido-de-la-documentación",
+    "title": "Documentación del Proyecto StressTrack",
+    "section": "Contenido de la Documentación",
+    "text": "Contenido de la Documentación\n\nManual de Usuario: Guía paso a paso para estudiantes.\nArquitectura del Sistema: Diagramas C4 (Niveles 1 al 4).\nInstalación y Despliegue: Guía para desarrolladores.\nEvidencias de Pruebas: Reportes de integración y rendimiento.\n\n\n\n\n\n\n\nNote\n\n\n\nEsta documentación se encuentra versionada junto con el código fuente en el repositorio oficial."
+  },
+  {
+    "objectID": "manual_usuario.html",
+    "href": "manual_usuario.html",
+    "title": "Manual de Usuario",
+    "section": "",
+    "text": "La aplicación permite a los estudiantes gestionar sus niveles de estrés académico tanto desde el navegador web como desde sus dispositivos móviles Android."
+  },
+  {
+    "objectID": "manual_usuario.html#introducción",
+    "href": "manual_usuario.html#introducción",
+    "title": "Manual de Usuario",
+    "section": "",
+    "text": "La aplicación permite a los estudiantes gestionar sus niveles de estrés académico tanto desde el navegador web como desde sus dispositivos móviles Android."
+  },
+  {
+    "objectID": "manual_usuario.html#acceso-al-sistema",
+    "href": "manual_usuario.html#acceso-al-sistema",
+    "title": "Manual de Usuario",
+    "section": "2. Acceso al Sistema",
+    "text": "2. Acceso al Sistema\n\nVersión Web\n\nNavegue a la URL proporcionada.\nIngrese sus credenciales institucionales.\n\n\n\nVersión Móvil\n\nAbra la app StressTrack en su celular.\n\n\n\n\nPantalla de Login Móvil"
+  },
+  {
+    "objectID": "manual_usuario.html#funcionalidad-principal-realizar-tets",
+    "href": "manual_usuario.html#funcionalidad-principal-realizar-tets",
+    "title": "Manual de Usuario",
+    "section": "3. Funcionalidad Principal: Realizar Tets",
+    "text": "3. Funcionalidad Principal: Realizar Tets\nPara realizar un nuevo Test:\n\nVaya al apartado de Tests en el Dashboard.\nSeleccione un test si tiene disponible.\nSelecione las casillas correspondiente a cada pregunta.\nPulse Terminar Test.\n\n\n\n\nPreguntas de Tests\n\n\n\n\n\n\n\n\nTip\n\n\n\nSincronización: Los datos guardados en el móvil se reflejan instantáneamente en la versión web y viceversa."
+  }
+]

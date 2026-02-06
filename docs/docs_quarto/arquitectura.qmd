@@ -1,0 +1,31 @@
+---
+title: "Arquitectura del Sistema (Modelo C4)"
+---
+
+La arquitectura se documenta utilizando el modelo C4 para visualizar las abstracciones por niveles.
+
+## Nivel 1: Diagrama de Contexto
+Muestra el sistema en el centro y sus interacciones con actores externos.
+
+![Diagrama de Contexto (Nivel 1)](images/c4_nivel1.png)
+
+---
+
+## Nivel 2: Diagrama de Contenedores
+Muestra las aplicaciones desplegables y bases de datos.
+
+![Diagrama de Contenedores (Nivel 2)](images/c4_nivel2.png)
+
+---
+
+## Nivel 3: Diagrama de Componentes (API Backend)
+Detalle interno del contenedor "Backend API".
+
+![Diagrama de Componentes (Nivel 3)](images/c4_nivel3.png)
+
+---
+
+## Nivel 4: Diagrama de Código (Modelo Principal)
+Detalle de la clase principal del dominio.
+
+![Diagrama de Clases (Nivel 4)](images/c4_nivel4.png)

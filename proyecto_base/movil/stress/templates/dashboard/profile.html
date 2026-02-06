@@ -16,7 +16,8 @@
         <label class="text-grisillo fw-bold my-2">Información de la cuenta</label>
     </div>
     
-    <div class="row g-4"> <div class="col-12 col-md-6 mt-2">
+    <div class="row g-4"> 
+        <div class="col-12 col-md-6 mt-2">
             <label class="text-grisillo fw-bold my-2">Perfil General</label>
             <form action="" method="POST" class="mb-2 p-3 border rounded bg-white">
                 {% csrf_token %}
@@ -33,7 +34,7 @@
                 
                 <div class="mb-3">
                     <label class="d-block pb-1 fs-7">DNI</label>
-                    <input type="text" name="dni" class="form-control fs-7 bg-light" value="{{ user.dni }}" readonly>
+                    <input type="text" name="dni" class="form-control fs-7 bg-light" value="{{ user.dni}}" readonly>
                 </div>
                 
                 <div class="mb-3">
@@ -49,7 +50,7 @@
                 </div>
     
                 <div class="d-grid mt-4 pt-2">
-                    <button class="btn btn-dark fs-7" type="submit" name="form-update-user" value="form-update-user">
+                    <button class="btn btn-success fs-7" type="submit" name="form-update-user" value="form-update-user">
                         Actualizar Datos
                     </button>
                 </div>
@@ -86,7 +87,7 @@
                 </div>
     
                 <div class="d-grid mt-4 pt-2">
-                    <button class="btn btn-dark fs-7" type="submit" name="form-update-pass" value="form-update-pass">
+                    <button class="btn btn-success fs-7" type="submit" name="form-update-pass" value="form-update-pass">
                         Actualizar contraseña
                     </button>
                 </div>
